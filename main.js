@@ -1,7 +1,9 @@
 const clickCounter = document.getElementById("clicks");
 const cpsDisplay = document.getElementById("CPS");
 const bestCpsDisplay = document.getElementById("bestCPS");
-
+const form = document.getElementById('user-form');
+const input = document.getElementById('username');
+let username = '';
 let clicks = 0;
 let cps = 0;
 let bestCps = 0;
@@ -27,3 +29,8 @@ const CPSLoop = setInterval(() => {
 
   cps = 0;
 }, 1000);
+
+   form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    username = input.value.trim();
+  });
