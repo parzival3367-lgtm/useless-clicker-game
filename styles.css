@@ -4,7 +4,12 @@
   opacity: 0.9;
 }
 
-#button::action {
+#button:active {
   scale: 1.1;
   opacity: 1;
+}
+
+#button:hover {
+  scale: 1;
+  opacity: 0.95;
 }
