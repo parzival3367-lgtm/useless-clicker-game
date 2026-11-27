@@ -70,7 +70,7 @@ function submitUsername() {
     username = inputVal;
     savedUsernames.push(username);
     localStorage.setItem('usernames', JSON.stringify(savedUsernames));
-    updateDropdown(); // Refresh dropdown with the new name
+    updateDropdown(); 
   }
 
   localStorage.setItem('lastUsername', username);
