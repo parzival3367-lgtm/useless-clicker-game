@@ -1,17 +1,29 @@
 .button {
-  border: 2px solid whitesmoke;
-  border-radius: 50%;
-  opacity: 0.9;
   width: 300px;
   height: 300px;
+  padding: 0;
+  border: 2px solid whitesmoke;
+  border-radius: 50%;
+  background: transparent;
+  opacity: 0.9;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.button:active {
-  scale: 1.1;
-  opacity: 1;
+.button img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .button:hover {
-  scale: 1;
+  transform: scale(1.03);
   opacity: 0.95;
+}
+
+.button:active {
+  transform: scale(1.1);
+  opacity: 1;
 }
