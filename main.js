@@ -29,12 +29,53 @@ const CPSLoop = setInterval(() => {
 
 const usernameInput = document.getElementById('username');
 const usernameSpan = document.getElementById('username-span');
+const datalist = document.getElementById('saved-usernames');
 
-let username = '';
+let savedUsernames = JSON.parse(localStorage.getItem('usernames')) || [];
+let username = localStorage.getItem('lastUsername') || '';
+
+function updateDropdown() {
+  datalist.innerHTML = '';
+  savedUsernames.forEach((name) => {
+    const option = document.createElement('option');
+    option.value = name;
+    datalist.appendChild(option);
+  });
+}
+
+if (username) {
+  usernameSpan.textContent = username;
+  usernameInput.value = username;
+}
+updateDropdown();
 
 function submitUsername() {
-  username = usernameInput.value.trim();
-  usernameSpan.textContent = username || 'Guest';
+  const inputVal = usernameInput.value.trim();
+
+  if (!inputVal) {
+    username = '';
+    usernameSpan.textContent = 'Guest';
+    localStorage.removeItem('lastUsername');
+    usernameInput.blur();
+    return;
+  }
+
+  const existingUser = savedUsernames.find(
+    (name) => name.toLowerCase() === inputVal.toLowerCase()
+  );
+
+  if (existingUser) {
+    username = existingUser;
+  } else {
+    username = inputVal;
+    savedUsernames.push(username);
+    localStorage.setItem('usernames', JSON.stringify(savedUsernames));
+    updateDropdown(); // Refresh dropdown with the new name
+  }
+
+  localStorage.setItem('lastUsername', username);
+  usernameSpan.textContent = username;
+  usernameInput.value = username;
   usernameInput.blur();
 }
 
@@ -45,11 +86,4 @@ usernameInput.addEventListener('keydown', (event) => {
   }
 });
 
-window.addEventListener('keydown', (e) => {
-  if (
-    (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') ||
-    (e.metaKey && e.altKey && e.key.toLowerCase() === 'i')
-  ) {
-    e.preventDefault();
-  }
-});
+usernameInput.addEventListener('change', submitUsername);
