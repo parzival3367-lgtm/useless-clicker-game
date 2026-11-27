@@ -38,11 +38,6 @@ function submitUsername() {
   usernameInput.blur();
 }
 
-usernameInput.addEventListener('input', () => {
-  username = usernameInput.value.trim();
-  usernameSpan.textContent = username || 'Guest';
-});
-
 usernameInput.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
     event.preventDefault();
