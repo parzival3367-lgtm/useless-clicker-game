@@ -49,3 +49,12 @@ usernameInput.addEventListener('keydown', (event) => {
     submitUsername();
   }
 });
+
+window.addEventListener('keydown', (e) => {
+  if (
+    (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') ||
+    (e.metaKey && e.altKey && e.key.toLowerCase() === 'i')
+  ) {
+    e.preventDefault();
+  }
+});
